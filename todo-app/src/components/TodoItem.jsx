@@ -1,17 +1,25 @@
-import React from 'react';
+import PropTypes from 'prop-types';
 
-function TodoItem({ todo, toggleTodo, deleteTodo }) {
+function TodoItem({ todo, toggleTodo }) {
     return (
         <div>
-            <input 
-                type="checkbox" 
-                checked={todo.completed} 
-                onChange={() => toggleTodo(todo.id)} 
+            <input
+                type="checkbox"
+                checked={todo.completed}
+                onChange={() => toggleTodo(todo.id)}
             />
             <span>{todo.title}</span>
-            <button className="button delete-button" onClick={() => deleteTodo(todo.id)}>Delete</button>
         </div>
     );
 }
+
+TodoItem.propTypes = {
+    todo: PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        title: PropTypes.string.isRequired,
+        completed: PropTypes.bool.isRequired,
+    }).isRequired,
+    toggleTodo: PropTypes.func.isRequired, // валидация для toggleTodo
+};
 
 export default TodoItem;
